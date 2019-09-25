@@ -135,4 +135,34 @@ class Chrome {
         driver.findElementById("supportsJoin").sendKeys(Keys.TAB)
         driver.findElementById("supportsJoin").sendKeys(Keys.ENTER)
     }
+
+    fun addGateway(name: String, des: String, id: String) {
+        Thread.sleep(1500)
+        driver.findElementByPartialLinkText("Gateways").click()
+        driver.findElementByPartialLinkText("CREATE").click()
+        driver.findElementById("name").click()
+        driver.findElementById("name").sendKeys(name)
+
+        driver.findElementById("description").click()
+        driver.findElementById("description").sendKeys(des)
+
+        driver.findElementById("id").click()
+        driver.findElementById("id").sendKeys(id)
+
+        driver.findElementById("networkServerID").click()
+        driver.findElementById("react-select-networkServerID-option-0").click()
+
+        driver.findElementById("gatewayProfileID").click()
+        driver.findElementById("react-select-gatewayProfileID-option-1").click()
+
+        var js = "window.scrollTo(0,1000)"
+        driver.executeScript(js)
+
+//        var location = driver.findElementByCssSelector(".jss226:nth-child(2) > .jss582").location
+//        println(location)
+
+        driver.findElementById("location.altitude")
+        Actions(driver).moveByOffset(1619, 1365).click().perform()
+//        Actions(driver).moveByOffset(1763, 967).click().perform()
+    }
 }

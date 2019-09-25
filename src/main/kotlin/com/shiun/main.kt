@@ -1,12 +1,11 @@
 package com.shiun
 
-import org.openqa.selenium.WebElement
+import com.sun.jdi.InterfaceType
+import org.openqa.selenium.chrome.ChromeDriver
 import java.io.FileInputStream
 import java.util.*
 
-fun main() {
-//    driver.get("http://localhost:8080/#/login/")
-
+fun setProperties(): Properties {
     val p = Properties()
     val propertiesPath = System.getProperty("user.dir")
     val propertiesFile = propertiesPath + "/src/main/resources/config.properties"
@@ -17,10 +16,17 @@ fun main() {
     val driverPath = propertiesPath + "/src/main/resources/chromedriver"
     System.setProperty("webdriver.chrome.driver", driverPath)
 
-    val chrome = Chrome()
-    chrome.openBrowser(p.getProperty("appserver.demoaddress"))
-//    chrome.register(p.getProperty("email"))
-    chrome.logIn(p.getProperty("username"), p.getProperty("password"))
+    return p
+}
+
+fun main() {
+//    driver.get("http://localhost:8080/#/login/")
+
+    var p = setProperties()
+
+//    val chrome = Chrome()
+//    chrome.openBrowser(p.getProperty("appserver.demoaddress"))
+//    chrome.logIn(p.getProperty("username"), p.getProperty("password"))
 
 //    chrome.addNetworkServer(p.getProperty("ns.name"), p.getProperty("ns.server"))
 
@@ -30,7 +36,13 @@ fun main() {
 
 //    chrome.addSvProfile(p.getProperty("sv.name"))
 
-    chrome.addDvProfile(p.getProperty("dv.name"))
+//    chrome.addDvProfile(p.getProperty("dv.name"))
 
+//    chrome.addGateway(p.getProperty("gw.name"), p.getProperty("gw.des"), p.getProperty("gw.id"))
+    openBrowser(p.getProperty("appserver.demoaddress"))
+
+    logIn(p.getProperty("username"), p.getProperty("password"))
+
+    Add().addGateway(p.getProperty("gw.name"), p.getProperty("gw.des"), p.getProperty("gw.id"))
 
 }
